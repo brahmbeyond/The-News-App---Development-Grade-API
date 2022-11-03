@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
-
+import Spinner from './Spinner'
 
 export default class News extends Component {
 
@@ -39,12 +39,13 @@ export default class News extends Component {
   async componentDidMount() {
 
 
-    // let data = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=1&pageSize=${this.props.pageSize}`);
-
+    let data = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=1&pageSize=${this.props.pageSize}`);
+this.setState({loading:true});
     let parsedData = await data.json();
     // console.log(parsedData);
     this.setState({ articles: parsedData.articles,
-    totalresults : parsedData.totalResults
+    totalresults : parsedData.totalResults,
+    loading: false,
     });
   
 
@@ -52,23 +53,25 @@ export default class News extends Component {
 
    prevNews= async ()=>{
     console.log('p');
-    // let data = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`);
-
+    let data = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`);
+    this.setState({loading:true});
     let parsedData = await data.json();
     console.log(parsedData);
     this.setState({ articles: parsedData.articles,
       page : this.state.page - 1,
+      loading: false,
      });
   }
 nextNews= async ()=>{
   console.log('n');
 
-  // let data = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`);
-
+  let data = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`);
+  this.setState({loading:true});
   let parsedData = await data.json();
   console.log(parsedData);
   this.setState({ articles: parsedData.articles,
     page : this.state.page + 1,
+    loading: false,
   })
  
 }
@@ -88,8 +91,9 @@ nextNews= async ()=>{
       //   </div>
       // </div>
       <div className='conatiner my-5 mx-4'>
+        {this.state.loading && <Spinner/>}
         <div className='row row-cols-1 row-cols-md-3 g-4'>
-          {this.state.articles.map((element) => {
+         {!this.state.loading && this.state.articles.map((element) => {
             return <NewsItem key={element.url}
               title={element.title}
               desc={element.description}
