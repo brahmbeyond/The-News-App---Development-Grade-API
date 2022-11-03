@@ -8,10 +8,12 @@ export default class News extends Component {
 
 
   constructor() {
+    
     super();
+    
     this.state = {
       articles: [],
-      loading: true,
+      loading: false,
       page: 1,
      
     }
@@ -37,7 +39,7 @@ export default class News extends Component {
   async componentDidMount() {
 
 
-    let data = await fetch('https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=1&pageSize=20');
+    // let data = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=1&pageSize=${this.props.pageSize}`);
 
     let parsedData = await data.json();
     // console.log(parsedData);
@@ -50,7 +52,7 @@ export default class News extends Component {
 
    prevNews= async ()=>{
     console.log('p');
-    let data = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=${this.state.page - 1}&pageSize=20`);
+    // let data = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`);
 
     let parsedData = await data.json();
     console.log(parsedData);
@@ -60,18 +62,14 @@ export default class News extends Component {
   }
 nextNews= async ()=>{
   console.log('n');
-if(this.state.page + 1 > Math.ceil(this.state.totalresults/20)){
-alert('This much news only');
-}
-else{
-  let data = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=${this.state.page + 1}&pageSize=20`);
+
+  // let data = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=694937b9f554425e9c51144cc8e184f5&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`);
 
   let parsedData = await data.json();
   console.log(parsedData);
   this.setState({ articles: parsedData.articles,
     page : this.state.page + 1,
-   });
-}
+  })
  
 }
 
@@ -103,7 +101,7 @@ else{
         </div>
         <div className='d-flex justify-content-between'>
         <button type="button" disabled={this.state.page <= 1} className="btn btn-dark"  onClick={this.prevNews}>prev</button>
-        <button type="button" className="btn btn-dark"  onClick={this.nextNews}>next</button>
+        <button type="button" disabled={this.state.page + 1 > Math.ceil(this.state.totalresults/this.props.pageSize)} className="btn btn-dark"  onClick={this.nextNews}>next</button>
         </div>
       </div>
     )
