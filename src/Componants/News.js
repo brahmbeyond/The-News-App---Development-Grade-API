@@ -56,7 +56,7 @@ this.setState({loading:true});
     let data = await fetch(`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=694937b9f554425e9c51144cc8e184f5&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`);
     this.setState({loading:true});
     let parsedData = await data.json();
-    console.log(parsedData);
+    // console.log(parsedData);
     this.setState({ articles: parsedData.articles,
       page : this.state.page - 1,
       loading: false,
@@ -68,7 +68,7 @@ nextNews= async ()=>{
   let data = await fetch(`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=694937b9f554425e9c51144cc8e184f5&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`);
   this.setState({loading:true});
   let parsedData = await data.json();
-  console.log(parsedData);
+  // console.log(parsedData);
   this.setState({ articles: parsedData.articles,
     page : this.state.page + 1,
     loading: false,
@@ -99,6 +99,7 @@ nextNews= async ()=>{
               desc={element.description}
               link={element.url} media={element.urlToImage}
               date={element.publishedAt}
+              source={element.source.name}
             />
           })}
 
