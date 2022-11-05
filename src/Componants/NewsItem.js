@@ -19,7 +19,7 @@ export default class NewsItem extends Component {
               <p className="card-text">{desc}</p>
             </div>
 
-            <a className="btn btn-sm btn-warning" href={link} target='_blank' role="button">Read More</a>
+            <a className="btn btn-sm btn-warning" href={link} rel="noreferrer" target='_blank' role="button">Read More</a>
 
             <div className="card-footer">
               <small className="text-danger">Published on : {date}</small>
