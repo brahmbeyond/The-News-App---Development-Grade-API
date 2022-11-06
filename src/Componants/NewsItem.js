@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class NewsItem extends Component {
-  render() {
-    let { id, title, desc, link, media, date, source } = this.props;
+const NewsItem =(props)=> {
+ 
+    let { id, title, desc, link, media, date, source } = props;
     const imgUrl = "https://thumbs.dreamstime.com/b/news-newspapers-folded-stacked-word-wooden-block-puzzle-dice-concept-newspaper-media-press-release-42301371.jpg";
     return (
       <>
@@ -28,5 +28,7 @@ export default class NewsItem extends Component {
         </div>
       </>
     )
-  }
+  
 }
+
+export default NewsItem
