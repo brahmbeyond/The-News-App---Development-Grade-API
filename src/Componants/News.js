@@ -99,6 +99,9 @@ const News = (props) => {
     //   </div>
     // </div>
     <>
+      <div className="text-center text-info my-3">
+        <h2>News from {capitalizeFirstLetter(props.category)} category </h2>
+      </div>
       {loading && <Spinner />}
 
       <InfiniteScroll
