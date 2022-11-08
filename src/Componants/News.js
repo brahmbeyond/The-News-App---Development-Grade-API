@@ -41,21 +41,19 @@ const News = (props) => {
     setLoading(true)
     let data = await fetch(`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`);
     props.setProgress(40);
-
-
     let parsedData = await data.json();
     props.setProgress(70);
     console.log(parsedData);
     setArticles(parsedData.articles)
     setTotalResults(parsedData.totalResults)
     setLoading(false)
-
     props.setProgress(100);
   }
 
   useEffect(() => {
     news();
     setPage(page + 1)
+    // eslint-disable-next-line 
   }, []);
 
   const fetchMoreData = async () => {
