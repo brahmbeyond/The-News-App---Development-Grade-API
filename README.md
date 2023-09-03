@@ -16,6 +16,9 @@ This is a simple news website built with React using Create React App (CRA) and 
 
 ## Demo
 
+![Untitled video - Made with Clipchamp](https://github.com/autumn-absconds/The-News-App---Development-Grade-API/assets/65112908/4edc8b95-ee8d-498c-8b8b-3faf2bd9fd2d)
+
+
 
 ![image](https://github.com/autumn-absconds/The-News-App---Development-Grade-API/assets/65112908/fc25aca2-ea24-469a-891f-d1ba9e4e5087)
 
